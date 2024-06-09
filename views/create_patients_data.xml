@@ -1,0 +1,58 @@
+<odoo>
+  <data>
+    <record id="view_patient_form" model="ir.ui.view">
+      <field name="name">patient.form</field>
+      <field name="model">hms.patient</field>
+      <field name="arch" type="xml">
+        <form string="Patient">
+          <group>
+            <field name="name"/>
+            <field name="age"/>
+            <field name="date_of_birth"/>
+            <field name="address"/>
+            <field name="image" widget="image"/>  <!-- Image field -->
+            <field name="blood_type"/>  <!-- Dropdown field -->
+            <field name="pcr"/>
+            <field name="cr" modifiers="{'invisible': [('is_hidden', '=', True)]}"/> 
+            <field name="history"/> 
+            <field name="department_id"/>  
+            <field name="department_capacity"/> 
+            <field name="states"/> 
+          </group>
+        </form>
+      </field>
+    </record>
+    
+
+    <record id="view_patient_tree" model="ir.ui.view">
+      <field name="name">patient.tree</field>
+      <field name="model">hms.patient</field>
+      <field name="arch" type="xml">
+        <tree string="Patient">
+          <field name="name"/>
+          <field name="age"/>
+          <field name="date_of_birth"/>
+          <field name="address"/>
+          <field name="image"/>
+          <field name="blood_type"/>  
+          <field name="pcr"/> 
+          <field name="cr"/>  
+          <field name="history"/>  
+          <field name="department_id"/>  
+          <field name="department_capacity"/>  
+          <field name="states"/>  
+        </tree>
+      </field>
+    </record>
+    
+
+    <record id="iti_patient_action" model="ir.actions.act_window">
+      <field name="name">Patients</field>
+      <field name="res_model">hms.patient</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="iti_main_menu" name="Hospitals Management Systems"/>
+    <menuitem id="patient_menu" name="Patients" parent="iti_main_menu" action="iti_patient_action"/>
+  </data>
+</odoo>
