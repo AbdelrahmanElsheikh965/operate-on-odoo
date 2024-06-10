@@ -1,10 +1,14 @@
 from odoo import models, fields, api
 from datetime import datetime
+from odoo.exceptions import ValidationError
+import re
 
 class Patient(models.Model):
     _name = 'hms.patient'
     _description = 'Patient'
     _inherit = ['mail.thread']
+    email = fields.Char(string="Email", required=True, tracking=True)
+
     
     name = fields.Char(string='Name', required=True, tracking=True)
     
@@ -80,3 +84,11 @@ class Patient(models.Model):
     
     # ➢ If The pcr field is checked, the CR ratio field should be mandatory
     # <field name="cr" modifiers="{'required': [('pcr', '=', True)]}"/>
+    
+    
+    @api.constrains('email')
+    def _check_email_validity(self):
+        email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        for record in self:
+            if record.email and not re.match(email_regex, record.email):
+                raise ValidationError("The email address is not valid.")
