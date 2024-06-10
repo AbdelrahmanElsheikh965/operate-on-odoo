@@ -38,6 +38,8 @@ class Patient(models.Model):
     
     history = fields.Html('History')
     
+    related_patient_id = fields.Many2one('res.partner', string='Related Patient')
+
     department_id = fields.Many2one('hms.department', tracking=True)
     department_capacity = fields.Integer(related= 'department_id.capacity', store=True)
     
@@ -103,3 +105,15 @@ class Patient(models.Model):
                 record.age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
             else:
                 record.age = 0
+    
+    @api.constrains('related_patient_id', 'email')
+    def _check_unique_email(self):
+        for record in self:
+            if record.related_patient_id and record.email:
+                partners = self.search([
+                    ('email', '=', record.email),
+                    ('id', '!=', record.id),
+                    ('related_patient_id', '!=', False)
+                ])
+                if partners:
+                    raise ValidationError("A patient with this email is already linked to a different customer.")

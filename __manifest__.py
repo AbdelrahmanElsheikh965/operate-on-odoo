@@ -10,5 +10,5 @@
   ],
   'installable': True,
   'auto_install': False,
-  'depends': ['base', 'mail'],
+  'depends': ['base', 'mail', 'crm'],
 }
