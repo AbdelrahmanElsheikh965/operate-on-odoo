@@ -2,6 +2,7 @@ from odoo import models, fields, api
 from datetime import datetime
 from odoo.exceptions import ValidationError
 import re
+from datetime import date
 
 class Patient(models.Model):
     _name = 'hms.patient'
@@ -12,7 +13,7 @@ class Patient(models.Model):
     
     name = fields.Char(string='Name', required=True, tracking=True)
     
-    age = fields.Integer(string='Age', tracking=True)
+    age = fields.Integer(string='Age', tracking=True, compute="_compute_age", store=True)
     
     gender = fields.Selection([
         ('male', 'Male'),
@@ -92,3 +93,13 @@ class Patient(models.Model):
         for record in self:
             if record.email and not re.match(email_regex, record.email):
                 raise ValidationError("The email address is not valid.")
+            
+    @api.depends('date_of_birth')
+    def _compute_age(self):
+        for record in self:
+            if record.date_of_birth:
+                today = date.today()
+                birth_date = fields.Date.from_string(record.date_of_birth)
+                record.age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
+            else:
+                record.age = 0

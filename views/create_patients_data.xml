@@ -8,7 +8,7 @@
           <group>
             <field name="name"/>
             <field name="email"/> 
-            <field name="age"/>
+            <field name="age" readonly="1"/>
             <field name="date_of_birth"/>
             <field name="address"/>
             <field name="image" widget="image"/>  <!-- Image field -->
@@ -36,7 +36,7 @@
         <tree string="Patient">
           <field name="name"/>
           <field name="email"/> 
-          <field name="age"/>
+          <field name="age" readonly="1"/>
           <field name="date_of_birth"/>
           <field name="address"/>
           <field name="image"/>
