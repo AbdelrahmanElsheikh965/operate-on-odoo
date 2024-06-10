@@ -1,37 +1,39 @@
 from odoo import models, fields, api
+from datetime import datetime
 
 class Patient(models.Model):
     _name = 'hms.patient'
     _description = 'Patient'
-
-    name = fields.Char(string='Name', required=True)
+    _inherit = ['mail.thread']
     
-    age = fields.Integer(string='Age')
+    name = fields.Char(string='Name', required=True, tracking=True)
+    
+    age = fields.Integer(string='Age', tracking=True)
     
     gender = fields.Selection([
         ('male', 'Male'),
         ('female', 'Female'),
         ('other', 'Other')
-    ], string='Gender')
+    ], string='Gender', tracking=True)
     
-    date_of_birth = fields.Date(string='Date of Birth')
+    date_of_birth = fields.Date(string='Date of Birth', tracking=True)
     
-    address = fields.Text(string='Address')
+    address = fields.Text(string='Address', tracking=True)
 
-    image = fields.Binary(string='Image')
+    image = fields.Binary(string='Image', tracking=True)
     
     blood_type = fields.Selection([
     ('A+', 'A+'),
     ('B+', 'B+'),
     ('AB+', 'AB+'),
-    ], string='Blood_Type')
+    ], string='Blood_Type', tracking=True)
     
-    cr = fields.Float(string='CR_Ratio', default=None)
-    pcr = fields.Boolean(string='pcr')
+    cr = fields.Float(string='CR_Ratio', default=None, tracking=True)
+    pcr = fields.Boolean(string='pcr', tracking=True)
     
     history = fields.Html('History')
     
-    department_id = fields.Many2one('hms.department')
+    department_id = fields.Many2one('hms.department', tracking=True)
     department_capacity = fields.Integer(related= 'department_id.capacity', store=True)
     
     doctors_ids =  fields.Many2many('hms.doctor')
@@ -41,7 +43,7 @@ class Patient(models.Model):
         ('Good', 'Good'),
         ('Fair', 'Fair'),
         ('Serious', 'Serious') 
-    ])
+    ], tracking=True)
     
     department_is_opened = fields.Boolean(string='Department Is Opened', related='department_id.is_opened')
 
