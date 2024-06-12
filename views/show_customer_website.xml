@@ -1,52 +1,26 @@
-<!-- <odoo>
-    <record id="view_partner_kanban" model="ir.ui.view">
-      <field name="name">res.partner.kanban</field>
-      <field name="model">res.partner</field>
-      <field name="arch" type="xml">
-
-            <field name="display_name" position="after">
-              <field name="website" />
-            </field>
-
-            <kanban>
-              <templates>
-                  <t t-name="kanban-box">
-                      <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">                          
-                          <div class="oe_kanban_details d-flex flex-column justify-content-between">
-                              <div>
-                                  <ul>
-                                      <li t-if="record.website.raw_value" class="o_text_overflow">
-                                        <field name="website"/>
-                                      </li>
-                                  </ul>
+<odoo>
+  <data>
+      <!-- Define Kanban view for res.partner model -->
+      <record id="view_partner_kanban" model="ir.ui.view">
+          <field name="name">res.partner.kanban</field>
+          <field name="model">res.partner</field>
+          <field name="arch" type="xml">
+              <kanban>
+                  <field name="color"/>
+                  <templates>
+                      <t t-name="kanban-box">
+                          <div t-attf-class="oe_kanban_color_#{kanban_color}">
+                              <div class="oe_kanban_details">
+                                  <strong><field name="name"/></strong>
+                                  <div><field name="email"/></div>
+                                  <div><field name="phone"/></div>
+                                  <div><field name="website"/></div>
                               </div>
                           </div>
-                      </div>
-                  </t>
-              </templates>
-          </kanban>
-          
-      </field>
-    </record>    
-</odoo> -->
-
-
-
-<odoo>
-    <data>
-        <!-- Define Kanban view for res.partner model -->
-        <record id="view_partner_kanban" model="ir.ui.view">
-            <field name="name">res.partner.kanban</field>
-            <field name="model">res.partner</field>
-            <field name="arch" type="xml">
-                <kanban>
-                    <templates>
-                        <t t-name="kanban-box">
-                            <div><field name="website"/></div>
-                        </t>
-                    </templates>
-                </kanban>
-            </field>
-        </record>
-    </data>
+                      </t>
+                  </templates>
+              </kanban>
+          </field>
+      </record>
+  </data>
 </odoo>
