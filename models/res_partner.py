@@ -3,10 +3,8 @@ from odoo.exceptions import ValidationError
 
 class ResPartner(models.Model):
   _inherit = 'res.partner'
-    # related_patient_id = fields.Many2one('hms.patient')
 
-
-  related_patient_id = fields.Many2one('hms.patient', string='Related Patient')
+  related_patient_id = fields.Many2one('hms.patient')
 
   @api.constrains('related_patient_id', 'email')
   def _check_unique_email(self):

@@ -38,9 +38,8 @@ class Patient(models.Model):
     
     history = fields.Html('History')
     
-    related_patient_id = fields.Many2one('res.partner', string='Related Patient')
-
     department_id = fields.Many2one('hms.department', tracking=True)
+    
     department_capacity = fields.Integer(related= 'department_id.capacity', store=True)
     
     doctors_ids =  fields.Many2many('hms.doctor')

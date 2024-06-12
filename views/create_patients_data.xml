@@ -11,13 +11,14 @@
             <field name="age" readonly="1"/>
             <field name="date_of_birth"/>
             <field name="address"/>
-            <field name="image" widget="image"/>  <!-- Image field -->
-            <field name="blood_type"/>  <!-- Dropdown field -->
+            <field name="image" widget="image"/> 
+            <field name="blood_type"/> 
             <field name="pcr"/>
-            <field name="cr" modifiers="{'invisible': [('is_hidden', '=', True)]}"/> 
-            <field name="history"/> 
+            <field name="cr"/> 
+            <!-- <field name="history" invisible='history' : 'True'/>  -->
             <field name="department_id"/>  
             <field name="department_capacity"/> 
+            <field name="doctors_ids"/> 
             <field name="states"/> 
           </group>
           <div class="oe_chatter">
@@ -43,10 +44,11 @@
           <field name="blood_type"/>  
           <field name="pcr"/> 
           <field name="cr"/>  
-          <field name="history"/>  
+          <!-- <field name="history"/>   --> 
           <field name="department_id"/>  
           <field name="department_capacity"/>  
-          <field name="states"/>  
+          <field name="doctors_ids"/>  
+          <field name="states"/> 
         </tree>
       </field>
     </record>
