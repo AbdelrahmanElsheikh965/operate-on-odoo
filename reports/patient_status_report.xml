@@ -60,6 +60,27 @@
                                     </td>
                                 </tr>
                             </table>
+
+                            <h3>Log History</h3>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Date</th>
+                                        <th>Info</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="o.message_ids" t-as="message">
+                                        <tr>
+                                            <td><span t-field="message.author_id.name"/></td>
+                                            <td><span t-field="message.date"/></td>
+                                            <td><span t-field="message.body"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+
                         </div>
                     </t>
                 </t>
