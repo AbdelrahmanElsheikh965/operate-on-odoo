@@ -9,6 +9,13 @@
             </xpath>
         </field> -->
 
+        <!-- <field name="inherit_id" ref="hms.view_patient_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='doctor_id']" position="attributes">
+                <attribute name="groups">base.group_user, hms.group_custom_manager</attribute>
+            </xpath>
+        </field> -->
+
       <field name="name">patient.form</field>
       <field name="model">hms.patient</field>
       <field name="arch" type="xml">
