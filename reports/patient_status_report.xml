@@ -46,7 +46,13 @@
                                 <tr class="text-center">
                                     <td class="mr-2 text-center">
                                         Doctors:
-                                        <span t-field="o.doctors_ids.first_name"/>
+                                                                                
+                                        <t t-set="counter" t-value="0"/>
+                                        <t t-foreach="o.doctors_ids" t-as="A">
+                                            <t t-set="counter" t-value="counter + 1"/>
+                                            <span t-field="A.first_name" /> ,
+                                        </t>
+
                                     </td>
                                     <td class=" mr-2 text-center">
                                         Email:
